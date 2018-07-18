@@ -132,6 +132,9 @@ file(REMOVE
     ${CURRENT_PACKAGES_DIR}/openssl.cnf
 )
 
+file(RENAME ${CURRENT_PACKAGES_DIR}/debug/lib/libeay32.lib ${CURRENT_PACKAGES_DIR}/debug/lib/libeay32d.lib)
+file(RENAME ${CURRENT_PACKAGES_DIR}/debug/lib/ssleay32.lib ${CURRENT_PACKAGES_DIR}/debug/lib/ssleay32d.lib)
+
 file(MAKE_DIRECTORY ${CURRENT_PACKAGES_DIR}/tools/openssl/)
 file(RENAME ${CURRENT_PACKAGES_DIR}/bin/openssl.exe ${CURRENT_PACKAGES_DIR}/tools/openssl/openssl.exe)
 
