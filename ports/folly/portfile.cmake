@@ -12,7 +12,11 @@ include(vcpkg_common_functions)
 # Required to run build/generate_escape_tables.py et al.
 vcpkg_find_acquire_program(PYTHON3)
 get_filename_component(PYTHON3_DIR "${PYTHON3}" DIRECTORY)
-set(ENV{PATH} "$ENV{PATH};${PYTHON3_DIR}")
+if(CMAKE_HOST_WIN32)
+    set(ENV{PATH} "$ENV{PATH};${PYTHON3_DIR}")
+else()
+    set(ENV{PATH} "$ENV{PATH}:${PYTHON3_DIR}")
+endif()
 
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
