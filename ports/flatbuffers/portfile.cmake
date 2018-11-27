@@ -38,7 +38,14 @@ if(flatc_path)
         ${flatc_path}
         ${CURRENT_PACKAGES_DIR}/tools/flatbuffers/${flatc_executable}
     )
-vcpkg_copy_tool_dependencies(${CURRENT_PACKAGES_DIR}/tools/flatbuffers)
+
+    set(FLATC_CMAKE_PATH ${CURRENT_PACKAGES_DIR}/share/flatbuffers/FlatcTargets-release.cmake)
+    file(READ ${FLATC_CMAKE_PATH} _contents)
+    string(REPLACE "${CURRENT_INSTALLED_DIR}" "\${_IMPORT_PREFIX}" _contents "${_contents}")
+    string(REGEX REPLACE "\\\${_IMPORT_PREFIX}/bin/(${flatc_executable})" "\${_IMPORT_PREFIX}/tools/${PORT}/\\1" _contents "${_contents}")
+    file(WRITE ${FLATC_CMAKE_PATH} "${_contents}")
+
+    vcpkg_copy_tool_dependencies(${CURRENT_PACKAGES_DIR}/tools/flatbuffers)
 endif()
 
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
