@@ -155,7 +155,6 @@ add_custom_command(
         no-zlib
         no-ssl2
         no-idea
-        no-cast
         no-seed
         no-md2
         no-tests
